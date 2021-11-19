@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.UI.Xaml.2.7.0\build\Microsoft.UI.Xaml.props" Condition="Exists('..\packages\Microsoft.UI.Xaml.2.7.0\build\Microsoft.UI.Xaml.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BC329C0D-A9D8-40C9-885C-2E65E790A801}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>luncher_rayman_aréna</RootNamespace>
+    <AssemblyName>luncher rayman aréna</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Diga.WebView2.Interop, Version=13.0.1.0, Culture=neutral, PublicKeyToken=b57a3a24e5935ad4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Diga.WebView2.Interop.13.0.1\lib\netstandard2.0\Diga.WebView2.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Diga.WebView2.WinForms, Version=13.0.1.0, Culture=neutral, PublicKeyToken=82b414213cc08e92, processorArchitecture=MSIL">
+      <HintPath>..\packages\Diga.WebView2.WinForms.13.0.1\lib\net472\Diga.WebView2.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Diga.WebView2.Wrapper, Version=13.0.1.0, Culture=neutral, PublicKeyToken=0ba9f1d70febdaef, processorArchitecture=MSIL">
+      <HintPath>..\packages\Diga.WebView2.Wrapper.13.0.1\lib\netstandard2.0\Diga.WebView2.Wrapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.1020.30, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1020.30\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.1020.30, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1020.30\lib\net45\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.1020.30, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1020.30\lib\net45\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="MimeTypeExtension, Version=1.0.28.1, Culture=neutral, PublicKeyToken=5bccdf24b37e4bab, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeTypeExtension.1.0.28\lib\netstandard2.0\MimeTypeExtension.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="acceuil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="acceuil.Designer.cs">
+      <DependentUpon>acceuil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="acceuil.resx">
+      <DependentUpon>acceuil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.manifest" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\2_tmet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L_muretto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sh_CAMINO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bonux.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cc_13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pad_02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pirates_plancher01txy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\la_sable2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pi2_mur1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\foret_sol0_TXY.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pi3_cage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pi3_cage1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pi2_maison.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tnt_caisse02_txy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\anello_doccia01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mx_grille.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mx_slodown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mx_grillecheck.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mx_circuit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\0b012e598d511d0cf0964ed73f528cd3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tex1_512x512_7ba73608fae95b17_14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fond.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inter_cr.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inter_cr_open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Inter_fa.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inter_fa_open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inter_la.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inter_la_open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inter_pi.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inter_pi_open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fond2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icona_telecamera.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icona_telecamera_off.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\L_muretto1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PngItem_36536261.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\r51.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\fils\texture\RaymanT\2\demo\r2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\fils\texture\RaymanT\3\demo\r3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\fils\texture\RaymanT\4\demo\r4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\fils\texture\globox\1\demo\g1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\fils\texture\globox\2\demo\g2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rw3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rw2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rw1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ra4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ra3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ra2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ra1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\r2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\r1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\p1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\h2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\h1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\g4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\g3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\g2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\g1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rw4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ra5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\r5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\p3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\h3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\g5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\r4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\r3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\p2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\g6.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fond2 - Copie.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Facebook.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\instagram.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\discord.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Twitter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\youtube.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.1020.30\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.1020.30\build\Microsoft.Web.WebView2.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Utilisez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est : {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.1020.30\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.1020.30\build\Microsoft.Web.WebView2.targets'))" />
+    <Error Condition="!Exists('..\packages\Diga.WebView2.Wrapper.13.0.1\build\Diga.WebView2.Wrapper.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Diga.WebView2.Wrapper.13.0.1\build\Diga.WebView2.Wrapper.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.UI.Xaml.2.7.0\build\Microsoft.UI.Xaml.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.UI.Xaml.2.7.0\build\Microsoft.UI.Xaml.props'))" />
+  </Target>
+  <Import Project="..\packages\Diga.WebView2.Wrapper.13.0.1\build\Diga.WebView2.Wrapper.targets" Condition="Exists('..\packages\Diga.WebView2.Wrapper.13.0.1\build\Diga.WebView2.Wrapper.targets')" />
+</Project>
