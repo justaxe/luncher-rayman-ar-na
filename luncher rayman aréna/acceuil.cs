@@ -5,20 +5,81 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using Microsoft.Web.WebView2.Core;
+using System.IO;
 
 namespace luncher_rayman_aréna
 {
+
+
+   
+
+
     public partial class acceuil : Form
     {
+
+
+
+        string cheminfichier = @"game\HD\adapter.txt "; //chemain fichier txt carte reseau
+        string cheminfichier2 = @"game\SD\adapter.txt "; //chemain fichier txt carte reseau
+
+
+        string curItem; //contenue de l'asenseur selectionner carte reseau
+
+
+
         public acceuil()
         {
-            
+
+
+   
+
+
             InitializeComponent();
 
-            Choixperso1.Text = "Rayman";
+// affiche les interface reseau au demarrage
+            Adapters obj = new Adapters();
+            var value = obj.net_adapters();
+            foreach (var name in value) { comboBox1.Items.Add(name); Console.WriteLine(name); }
+
+            comboBox1.SelectedIndex = 0; // combo carte reseau
+
+            int radminok = 0; //radmin vpn installer
+
+
+            //test si le fichier txt est present
+            if (!File.Exists(cheminfichier))
+            {
+                MessageBox.Show("fichier non present");
+                foreach (var name in value)  // on cherche si la personne a bien radmin vpn sur son pc
+                {
+                    if (name == "Radmin VPN")
+                    {
+                        radminok = 1;
+                    }
+                }
+
+                if (radminok == 0) // si il la pas on  l'avertie de l'installer
+                {
+                    MessageBox.Show(Pasradmin);
+                }
+                else
+                {
+                    File.WriteAllText(cheminfichier, "Radmin VPN");
+                    File.WriteAllText(cheminfichier2, "Radmin VPN");
+                }
+
+            }
+
+
+
+
+                Choixperso1.Text = "Rayman";
             Choixperso1.Items.Insert(0, "Rayman");
             Choixperso1.SelectedIndex = 0;
             skin1.SelectedIndex = 0;
@@ -49,6 +110,11 @@ namespace luncher_rayman_aréna
         string messageboxLangue = "";
         string messageboxNoVideo = "game intro videos have been disabled";
         string messageboxOkVideo= "the game's intro videos have been reactivated";
+        string Choixcard = " well was to select";
+        string Pasradmin = "we have detected that you do not have Radmin Vpn installed. This program is required to play the game online";
+
+
+
 
 
         void Choiximagetexturecustom()
@@ -747,19 +813,25 @@ namespace luncher_rayman_aréna
 
         }
 
-        private void webView21_Click(object sender, EventArgs e)
-        {
-           
-        }
 
-        private void webView21_Click_1(object sender, EventArgs e)
+
+
+
+
+        private async  void acceuil_Load(object sender, EventArgs e)
         {
 
-        }
+            var webViewEnvironnement = await CoreWebView2Environment.CreateAsync(null, @"c:/temp");
+            await webView22.EnsureCoreWebView2Async(webViewEnvironnement);
+            webView22.CoreWebView2.Navigate("https://www.youtube.com/embed/jTdGHXCD3s8");
 
-        private void acceuil_Load(object sender, EventArgs e)
-        {
-            
+
+          
+
+
+
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -979,7 +1051,7 @@ namespace luncher_rayman_aréna
                 btnValidskin3.Text = "edit skin";
                 btnValidskin4.Text = "edit skin";
 
-                label44.Text = "Follow us";
+                reseauSociaux.Text = "Follow us";
                 
 
                 button21.Text = "reset all skin to default";
@@ -997,8 +1069,10 @@ namespace luncher_rayman_aréna
 
                 messageboxNoVideo = "game intro videos have been disabled";
                 messageboxOkVideo = "the game's intro videos have been reactivated";
+                Choixcard = " well was to select";
+                Pasradmin = "we have detected that you do not have Radmin Vpn installed. This program is required to play the game online";
 
-
+                toolTip1.SetToolTip(Modifier, "modify");
 
 
             }
@@ -1066,7 +1140,7 @@ namespace luncher_rayman_aréna
 
                 button21.Text = "remettre tous les skin par default";
 
-                label44.Text = "Suivez-nous";
+                reseauSociaux.Text = "Suivez-nous";
 
                 //modifie les toltip
                 toolTip1.SetToolTip(BtnLuncheurGameFull, "Le faire uniquement si vous recevez une erreur qui demande le CD2 au lancement du jeu");
@@ -1081,6 +1155,12 @@ namespace luncher_rayman_aréna
 
                 messageboxNoVideo = "les vidéos d'introduction du jeu ont été désactivées";
                 messageboxOkVideo = "les vidéos d'introduction du jeu ont été réactivées";
+                 Choixcard = " bien a été sélectionné";
+                 Pasradmin = "nous avons détecté que vous n'avez pas installé Radmin Vpn. Ce programme est nécessaire pour jouer au jeu en ligne";
+
+
+                toolTip1.SetToolTip(Modifier, "Modifier");
+
 
             }
             else if (changelangue.SelectedIndex.ToString() == "2")
@@ -1148,7 +1228,7 @@ namespace luncher_rayman_aréna
 
                 button21.Text = "restablecer todos los aspectos a los predeterminados";
 
-                label44.Text = "Síguenos";
+                reseauSociaux.Text = "Síguenos";
 
                 //modifie les toltip
                 toolTip1.SetToolTip(BtnLuncheurGameFull, "Haz esto solo si recibes un error de CD que pregunta al iniciar el juego");
@@ -1163,9 +1243,12 @@ namespace luncher_rayman_aréna
 
                 messageboxNoVideo = "Se han desactivado los vídeos de introducción al juego.";
                 messageboxOkVideo = "Se reactivaron los videos de introducción del juego.";
+                Choixcard = " bien fue seleccionado";
+                Pasradmin = "Hemos detectado que no tiene Radmin Vpn instalado. Este programa es necesario para jugar el juego en línea.";
 
 
-
+                toolTip1.SetToolTip(Modifier, "Editar");
+                
 
             }
         }
@@ -1177,9 +1260,11 @@ namespace luncher_rayman_aréna
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MessageBox.Show("the function is not yet supported. ");
-            MessageBox.Show("Please choose your card once the game has started. ");
             
+
+            //MessageBox.Show("the function is not yet supported. ");
+            //MessageBox.Show("Please choose your card once the game has started. ");
+
         }
 
         private void Choixperso1_SelectedIndexChanged(object sender, EventArgs e)
@@ -1826,7 +1911,30 @@ namespace luncher_rayman_aréna
                 {
                     if (empl1.SelectedIndex.ToString() == "0")
                     {
-                        MessageBox.Show("rayman original emplacement 1");
+
+
+                        // COPY texture\Original\HD\textures_perso\RaymanT.gf  TO  game\HD\MenuBin\tex32.cnt:\textures_perso\RaymanT.gf
+                        // COPY texture\Original\HD\textures_perso\RaymanT.gf  TO  game\HD\FishBin\tex32.cnt:\textures_perso\RaymanT.gf
+                        // COPY texture\Original\HD\textures_perso\RaymanT.gf  TO  game\HD\TribeBin\tex32.cnt:\actor\RaymanT\RaymanT.gf
+
+                        // COPY texture\Original\SD\textures_perso\RaymanT.gf  TO  game\SD\MenuBin\tex32.cnt:\textures_perso\RaymanT.gf
+                        // COPY texture\Original\SD\textures_perso\RaymanT.gf  TO  game\SD\FishBin\tex32.cnt:\textures_perso\RaymanT.gf
+                        // COPY texture\Original\SD\textures_perso\RaymanT.gf  TO  game\SD\TribeBin\tex32.cnt:\actor\RaymanT\RaymanT.gf
+
+
+                        // COPY texture\Original\HD\textures_perso\Helice.gf  TO  game\HD\MenuBin\tex32.cnt:\textures_perso\Helice.gf
+                        // COPY texture\Original\HD\textures_perso\Helice.gf  TO  game\HD\FishBin\tex32.cnt:\textures_perso\Helice.gf
+                        // COPY texture\Original\HD\textures_perso\Helice.gf  TO  game\HD\TribeBin\tex32.cnt:\actor\RaymanT\Helice.gf
+
+                        // COPY texture\Original\SD\textures_perso\Helice.gf  TO  game\SD\MenuBin\tex32.cnt:\textures_perso\Helice.gf
+                        // COPY texture\Original\SD\textures_perso\Helice.gf  TO  game\SD\FishBin\tex32.cnt:\textures_perso\Helice.gf
+                        // COPY texture\Original\SD\textures_perso\Helice.gf  TO  game\SD\TribeBin\tex32.cnt:\actor\RaymanT\Helice.gf
+
+
+
+                        // MessageBox.Show("rayman original emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
+                        
                     }
                        
                 }
@@ -1834,28 +1942,73 @@ namespace luncher_rayman_aréna
                 {
                     if (empl1.SelectedIndex.ToString() == "0")
                     {
-                        MessageBox.Show("rayman skin1 emplacement 1");
+                        //MessageBox.Show("rayman skin1 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
+
+                        // COPY \texture\RaymanT\1\hd\gf\RaymanT.gf  TO  game\HD\MenuBin\tex32.cnt:\textures_perso\RaymanT.gf
+                        // COPY \texture\RaymanT\1\hd\gf\RaymanT.gf  TO  game\HD\FishBin\tex32.cnt:\textures_perso\RaymanT.gf
+                        // COPY \texture\RaymanT\1\hd\gf\RaymanT.gf  TO  game\HD\TribeBin\tex32.cnt:\actor\RaymanT\RaymanT.gf
+
+                        // COPY texture\RaymanT\1\gf\RaymanT.gf  TO  game\SD\MenuBin\tex32.cnt:\textures_perso\RaymanT.gf
+                        // COPY texture\RaymanT\1\gf\RaymanT.gf  TO  game\SD\FishBin\tex32.cnt:\textures_perso\RaymanT.gf
+                        // COPY texture\RaymanT\1\gf\RaymanT.gf  TO  game\SD\TribeBin\tex32.cnt:\actor\RaymanT\RaymanT.gf
+
+
+                        // COPY \texture\RaymanT\1\hd\gf\Helice.gf  TO  game\HD\MenuBin\tex32.cnt:\textures_perso\Helice.gf
+                        // COPY \texture\RaymanT\1\hd\gf\Helice.gf  TO  game\HD\FishBin\tex32.cnt:\textures_perso\Helice.gf
+                        // COPY \texture\RaymanT\1\hd\gf\Helice.gf  TO  game\HD\TribeBin\tex32.cnt:\actor\RaymanT\Helice.gf
+
+                        // COPY texture\RaymanT\1\gf\Helice.gf  TO  game\SD\MenuBin\tex32.cnt:\textures_perso\Helice.gf
+                        // COPY texture\RaymanT\1\gf\Helice.gf  TO  game\SD\FishBin\tex32.cnt:\textures_perso\Helice.gf
+                        // COPY texture\RaymanT\1\gf\Helice.gf  TO  game\SD\TribeBin\tex32.cnt:\actor\RaymanT\Helice.gf
+
+
                     }
                 }
                 else if (skin1.SelectedIndex.ToString() == "2")
                 {
                     if (empl1.SelectedIndex.ToString() == "0")
                     {
-                        MessageBox.Show("rayman skin2 emplacement 1");
+                        //MessageBox.Show("rayman skin2 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
+
+
+                        // COPY \texture\RaymanT\2\hd\gf\RaymanT.gf  TO  game\HD\MenuBin\tex32.cnt:\textures_perso\RaymanT.gf
+                        // COPY \texture\RaymanT\2\hd\gf\RaymanT.gf  TO  game\HD\FishBin\tex32.cnt:\textures_perso\RaymanT.gf
+                        // COPY \texture\RaymanT\2\hd\gf\RaymanT.gf  TO  game\HD\TribeBin\tex32.cnt:\actor\RaymanT\RaymanT.gf
+
+                        // COPY texture\RaymanT\2\gf\RaymanT.gf  TO  game\SD\MenuBin\tex32.cnt:\textures_perso\RaymanT.gf
+                        // COPY texture\RaymanT\2\gf\RaymanT.gf  TO  game\SD\FishBin\tex32.cnt:\textures_perso\RaymanT.gf
+                        // COPY texture\RaymanT\2\gf\RaymanT.gf  TO  game\SD\TribeBin\tex32.cnt:\actor\RaymanT\RaymanT.gf
+
+
+                        // COPY \texture\RaymanT\2\hd\gf\Helice.gf  TO  game\HD\MenuBin\tex32.cnt:\textures_perso\Helice.gf
+                        // COPY \texture\RaymanT\2\hd\gf\Helice.gf  TO  game\HD\FishBin\tex32.cnt:\textures_perso\Helice.gf
+                        // COPY \texture\RaymanT\2\hd\gf\Helice.gf  TO  game\HD\TribeBin\tex32.cnt:\actor\RaymanT\Helice.gf
+
+                        // COPY texture\RaymanT\2\gf\Helice.gf  TO  game\SD\MenuBin\tex32.cnt:\textures_perso\Helice.gf
+                        // COPY texture\RaymanT\2\gf\Helice.gf  TO  game\SD\FishBin\tex32.cnt:\textures_perso\Helice.gf
+                        // COPY texture\RaymanT\2\gf\Helice.gf  TO  game\SD\TribeBin\tex32.cnt:\actor\RaymanT\Helice.gf
+
+
+
+
                     }
                 }
                 else if (skin1.SelectedIndex.ToString() == "3")
                 {
                     if (empl1.SelectedIndex.ToString() == "0")
                     {
-                        MessageBox.Show("rayman skin3 emplacement 1");
+                        //MessageBox.Show("rayman skin3 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
                 else if (skin1.SelectedIndex.ToString() == "4")
                 {
                     if (empl1.SelectedIndex.ToString() == "0")
                     {
-                        MessageBox.Show("rayman skin4 emplacement 1");
+                        //MessageBox.Show("rayman skin4 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
             }
@@ -1868,7 +2021,8 @@ namespace luncher_rayman_aréna
                 {
                     if (empl1.SelectedIndex.ToString() == "0")
                     {
-                        MessageBox.Show("razor original emplacement 1");
+                        //MessageBox.Show("razor original emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
 
                 }
@@ -1876,28 +2030,32 @@ namespace luncher_rayman_aréna
                 {
                     if (empl1.SelectedIndex.ToString() == "0")
                     {
-                        MessageBox.Show("razor skin1 emplacement 1");
+                        //MessageBox.Show("razor skin1 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
                 else if (skin1.SelectedIndex.ToString() == "2")
                 {
                     if (empl1.SelectedIndex.ToString() == "0")
                     {
-                        MessageBox.Show("razor skin2 emplacement 1");
+                        //MessageBox.Show("razor skin2 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
                 else if (skin1.SelectedIndex.ToString() == "3")
                 {
                     if (empl1.SelectedIndex.ToString() == "0")
                     {
-                        MessageBox.Show("razor skin3 emplacement 1");
+                       // MessageBox.Show("razor skin3 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
                 else if (skin1.SelectedIndex.ToString() == "4")
                 {
                     if (empl1.SelectedIndex.ToString() == "0")
                     {
-                        MessageBox.Show("razor skin4 emplacement 1");
+                        //MessageBox.Show("razor skin4 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
             }
@@ -1910,7 +2068,8 @@ namespace luncher_rayman_aréna
                 {
                     if (empl1.SelectedIndex.ToString() == "0")
                     {
-                        MessageBox.Show("razorwife original emplacement 1");
+                        //MessageBox.Show("razorwife original emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
 
                 }
@@ -1918,14 +2077,16 @@ namespace luncher_rayman_aréna
                 {
                     if (empl1.SelectedIndex.ToString() == "0")
                     {
-                        MessageBox.Show("razorwife skin1 emplacement 1");
+                        //MessageBox.Show("razorwife skin1 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
                 else if (skin1.SelectedIndex.ToString() == "2")
                 {
                     if (empl1.SelectedIndex.ToString() == "0")
                     {
-                        MessageBox.Show("razorwife skin2 emplacement 1");
+                        //MessageBox.Show("razorwife skin2 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
                 else if (skin1.SelectedIndex.ToString() == "3")
@@ -1933,6 +2094,7 @@ namespace luncher_rayman_aréna
                     if (empl1.SelectedIndex.ToString() == "0")
                     {
                         MessageBox.Show("razorwife skin3 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
 
@@ -1946,26 +2108,32 @@ namespace luncher_rayman_aréna
                     if (skin1.SelectedIndex.ToString() == "0")
                     {
                         MessageBox.Show("globox original emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "1")
                     {
                         MessageBox.Show("globox skin1 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "2")
                     {
                         MessageBox.Show("globox skin2 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "3")
                     {
                         MessageBox.Show("globox skin3 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "4")
                     {
                         MessageBox.Show("globox  skin4  emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "5")
                     {
                         MessageBox.Show("globox  skin5  emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
 
@@ -1974,26 +2142,32 @@ namespace luncher_rayman_aréna
                     if (skin1.SelectedIndex.ToString() == "0")
                     {
                         MessageBox.Show("globox original emplacement 2");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "1")
                     {
                         MessageBox.Show("globox skin1 emplacement 2");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "2")
                     {
                         MessageBox.Show("globox skin2 emplacement 2");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "3")
                     {
                         MessageBox.Show("globox skin3 emplacement 2");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "4")
                     {
                         MessageBox.Show("globox  skin4  emplacement 2");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "5")
                     {
                         MessageBox.Show("globox  skin5  emplacement 2");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
 
@@ -2002,26 +2176,32 @@ namespace luncher_rayman_aréna
                     if (skin1.SelectedIndex.ToString() == "0")
                     {
                         MessageBox.Show("globox original emplacement 3");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "1")
                     {
                         MessageBox.Show("globox skin1 emplacement 3");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "2")
                     {
                         MessageBox.Show("globox skin2 emplacement 3");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "3")
                     {
                         MessageBox.Show("globox skin3 emplacement 3");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "4")
                     {
                         MessageBox.Show("globox  skin4  emplacement 3");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "5")
                     {
                         MessageBox.Show("globox  skin5  emplacement 3");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
 
@@ -2030,26 +2210,32 @@ namespace luncher_rayman_aréna
                     if (skin1.SelectedIndex.ToString() == "0")
                     {
                         MessageBox.Show("globox original emplacement 4");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "1")
                     {
                         MessageBox.Show("globox skin1 emplacement 4");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "2")
                     {
                         MessageBox.Show("globox skin2 emplacement 4");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "3")
                     {
                         MessageBox.Show("globox skin3 emplacement 4");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "4")
                     {
                         MessageBox.Show("globox  skin4  emplacement 4");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "5")
                     {
                         MessageBox.Show("globox  skin5  emplacement 4");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
 
@@ -2058,26 +2244,32 @@ namespace luncher_rayman_aréna
                     if (skin1.SelectedIndex.ToString() == "0")
                     {
                         MessageBox.Show("globox original emplacement 5");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "1")
                     {
                         MessageBox.Show("globox skin1 emplacement 5");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "2")
                     {
                         MessageBox.Show("globox skin2 emplacement 5");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "3")
                     {
                         MessageBox.Show("globox skin3 emplacement 5");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "4")
                     {
                         MessageBox.Show("globox  skin4  emplacement 5");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "5")
                     {
                         MessageBox.Show("globox  skin5  emplacement 5");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
 
@@ -2093,14 +2285,17 @@ namespace luncher_rayman_aréna
                     if (skin1.SelectedIndex.ToString() == "0")
                     {
                         MessageBox.Show("huchman original emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "1")
                     {
                         MessageBox.Show("huchman skin1 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "2")
                     {
                         MessageBox.Show("huchman skin2 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                    
                 }
@@ -2110,14 +2305,17 @@ namespace luncher_rayman_aréna
                     if (skin1.SelectedIndex.ToString() == "0")
                     {
                         MessageBox.Show("huchman original emplacement 2");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "1")
                     {
                         MessageBox.Show("huchman skin1 emplacement 2");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "2")
                     {
                         MessageBox.Show("huchman skin2 emplacement 2");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
 
@@ -2126,14 +2324,17 @@ namespace luncher_rayman_aréna
                     if (skin1.SelectedIndex.ToString() == "0")
                     {
                         MessageBox.Show("huchman original emplacement 3");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "1")
                     {
                         MessageBox.Show("huchman skin1 emplacement 3");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "2")
                     {
                         MessageBox.Show("huchman skin2 emplacement 3");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
 
@@ -2142,14 +2343,17 @@ namespace luncher_rayman_aréna
                     if (skin1.SelectedIndex.ToString() == "0")
                     {
                         MessageBox.Show("huchman original emplacement 4");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "1")
                     {
                         MessageBox.Show("huchman skin1 emplacement 4");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "2")
                     {
                         MessageBox.Show("huchman skin2 emplacement 4");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
 
@@ -2158,14 +2362,17 @@ namespace luncher_rayman_aréna
                     if (skin1.SelectedIndex.ToString() == "0")
                     {
                         MessageBox.Show("huchman original emplacement 5");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "1")
                     {
                         MessageBox.Show("huchman skin1 emplacement 5");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "2")
                     {
                         MessageBox.Show("huchman skin2 emplacement 5");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
 
@@ -2179,14 +2386,17 @@ namespace luncher_rayman_aréna
                     if (skin1.SelectedIndex.ToString() == "0")
                     {
                         MessageBox.Show("ptizetre original emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "1")
                     {
                         MessageBox.Show("ptizetre skin1 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "2")
                     {
                         MessageBox.Show("ptizetre skin2 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
 
                 }
@@ -2196,14 +2406,17 @@ namespace luncher_rayman_aréna
                     if (skin1.SelectedIndex.ToString() == "0")
                     {
                         MessageBox.Show("ptizetre original emplacement 2");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "1")
                     {
                         MessageBox.Show("ptizetre skin1 emplacement 2");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "2")
                     {
                         MessageBox.Show("ptizetre skin2 emplacement 2");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
 
@@ -2212,14 +2425,17 @@ namespace luncher_rayman_aréna
                     if (skin1.SelectedIndex.ToString() == "0")
                     {
                         MessageBox.Show("ptizetre original emplacement 3");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "1")
                     {
                         MessageBox.Show("ptizetre skin1 emplacement 3");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "2")
                     {
                         MessageBox.Show("ptizetre skin2 emplacement 3");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
 
@@ -2228,14 +2444,17 @@ namespace luncher_rayman_aréna
                     if (skin1.SelectedIndex.ToString() == "0")
                     {
                         MessageBox.Show("ptizetre original emplacement 4");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "1")
                     {
                         MessageBox.Show("ptizetre skin1 emplacement 4");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "2")
                     {
                         MessageBox.Show("ptizetre skin2 emplacement 4");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
 
@@ -2244,14 +2463,17 @@ namespace luncher_rayman_aréna
                     if (skin1.SelectedIndex.ToString() == "0")
                     {
                         MessageBox.Show("ptizetre original emplacement 5");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "1")
                     {
                         MessageBox.Show("ptizetre skin1 emplacement 5");
+                        MessageBox.Show("this function is not yet available.");
                     }
                     else if (skin1.SelectedIndex.ToString() == "2")
                     {
                         MessageBox.Show("ptizetre skin2 emplacement 5");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
             }
@@ -2265,6 +2487,7 @@ namespace luncher_rayman_aréna
                     if (empl1.SelectedIndex.ToString() == "0")
                     {
                         MessageBox.Show("tily original emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
 
                 }
@@ -2273,6 +2496,7 @@ namespace luncher_rayman_aréna
                     if (empl1.SelectedIndex.ToString() == "0")
                     {
                         MessageBox.Show("tily skin1 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
                 else if (skin1.SelectedIndex.ToString() == "2")
@@ -2280,6 +2504,7 @@ namespace luncher_rayman_aréna
                     if (empl1.SelectedIndex.ToString() == "0")
                     {
                         MessageBox.Show("tily skin2 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
                 else if (skin1.SelectedIndex.ToString() == "3")
@@ -2287,6 +2512,7 @@ namespace luncher_rayman_aréna
                     if (empl1.SelectedIndex.ToString() == "0")
                     {
                         MessageBox.Show("tily skin3 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
                 else if (skin1.SelectedIndex.ToString() == "4")
@@ -2294,6 +2520,7 @@ namespace luncher_rayman_aréna
                     if (empl1.SelectedIndex.ToString() == "0")
                     {
                         MessageBox.Show("tily skin4 emplacement 1");
+                        MessageBox.Show("this function is not yet available.");
                     }
                 }
 
@@ -2403,7 +2630,7 @@ namespace luncher_rayman_aréna
                 {
                     if (empl2.SelectedIndex.ToString() == "0")
                     {
-                        MessageBox.Show("razorwife skin2 emplacement 1");
+                        MessageBox.Show("razorwife skin1 emplacement 1");
                     }
                 }
                 else if (skin2.SelectedIndex.ToString() == "2")
@@ -2434,7 +2661,7 @@ namespace luncher_rayman_aréna
                     }
                     else if (skin2.SelectedIndex.ToString() == "1")
                     {
-                        MessageBox.Show("globox skin2 emplacement 1");
+                        MessageBox.Show("globox skin1 emplacement 1");
                     }
                     else if (skin2.SelectedIndex.ToString() == "2")
                     {
@@ -2462,7 +2689,7 @@ namespace luncher_rayman_aréna
                     }
                     else if (skin2.SelectedIndex.ToString() == "1")
                     {
-                        MessageBox.Show("globox skin2 emplacement 2");
+                        MessageBox.Show("globox skin1 emplacement 2");
                     }
                     else if (skin2.SelectedIndex.ToString() == "2")
                     {
@@ -2490,7 +2717,7 @@ namespace luncher_rayman_aréna
                     }
                     else if (skin2.SelectedIndex.ToString() == "1")
                     {
-                        MessageBox.Show("globox skin2 emplacement 3");
+                        MessageBox.Show("globox skin1 emplacement 3");
                     }
                     else if (skin2.SelectedIndex.ToString() == "2")
                     {
@@ -2518,7 +2745,7 @@ namespace luncher_rayman_aréna
                     }
                     else if (skin2.SelectedIndex.ToString() == "1")
                     {
-                        MessageBox.Show("globox skin2 emplacement 4");
+                        MessageBox.Show("globox skin1 emplacement 4");
                     }
                     else if (skin2.SelectedIndex.ToString() == "2")
                     {
@@ -2546,7 +2773,7 @@ namespace luncher_rayman_aréna
                     }
                     else if (skin2.SelectedIndex.ToString() == "1")
                     {
-                        MessageBox.Show("globox skin2 emplacement 5");
+                        MessageBox.Show("globox skin1 emplacement 5");
                     }
                     else if (skin2.SelectedIndex.ToString() == "2")
                     {
@@ -2581,7 +2808,7 @@ namespace luncher_rayman_aréna
                     }
                     else if (skin2.SelectedIndex.ToString() == "1")
                     {
-                        MessageBox.Show("huchman skin2 emplacement 1");
+                        MessageBox.Show("huchman skin1 emplacement 1");
                     }
                     else if (skin2.SelectedIndex.ToString() == "2")
                     {
@@ -2598,7 +2825,7 @@ namespace luncher_rayman_aréna
                     }
                     else if (skin2.SelectedIndex.ToString() == "1")
                     {
-                        MessageBox.Show("huchman skin2 emplacement 2");
+                        MessageBox.Show("huchman skin1 emplacement 2");
                     }
                     else if (skin2.SelectedIndex.ToString() == "2")
                     {
@@ -2614,7 +2841,7 @@ namespace luncher_rayman_aréna
                     }
                     else if (skin2.SelectedIndex.ToString() == "1")
                     {
-                        MessageBox.Show("huchman skin2 emplacement 3");
+                        MessageBox.Show("huchman skin1 emplacement 3");
                     }
                     else if (skin2.SelectedIndex.ToString() == "2")
                     {
@@ -2630,7 +2857,7 @@ namespace luncher_rayman_aréna
                     }
                     else if (skin2.SelectedIndex.ToString() == "1")
                     {
-                        MessageBox.Show("huchman skin2 emplacement 4");
+                        MessageBox.Show("huchman skin1 emplacement 4");
                     }
                     else if (skin2.SelectedIndex.ToString() == "2")
                     {
@@ -2646,7 +2873,7 @@ namespace luncher_rayman_aréna
                     }
                     else if (skin2.SelectedIndex.ToString() == "1")
                     {
-                        MessageBox.Show("huchman skin2 emplacement 5");
+                        MessageBox.Show("huchman skin1 emplacement 5");
                     }
                     else if (skin2.SelectedIndex.ToString() == "2")
                     {
@@ -2667,7 +2894,7 @@ namespace luncher_rayman_aréna
                     }
                     else if (skin2.SelectedIndex.ToString() == "1")
                     {
-                        MessageBox.Show("ptizetre skin2 emplacement 1");
+                        MessageBox.Show("ptizetre skin1 emplacement 1");
                     }
                     else if (skin2.SelectedIndex.ToString() == "2")
                     {
@@ -2684,7 +2911,7 @@ namespace luncher_rayman_aréna
                     }
                     else if (skin2.SelectedIndex.ToString() == "1")
                     {
-                        MessageBox.Show("ptizetre skin2 emplacement 2");
+                        MessageBox.Show("ptizetre skin1 emplacement 2");
                     }
                     else if (skin2.SelectedIndex.ToString() == "2")
                     {
@@ -2700,7 +2927,7 @@ namespace luncher_rayman_aréna
                     }
                     else if (skin2.SelectedIndex.ToString() == "1")
                     {
-                        MessageBox.Show("ptizetre skin2 emplacement 3");
+                        MessageBox.Show("ptizetre skin1 emplacement 3");
                     }
                     else if (skin2.SelectedIndex.ToString() == "2")
                     {
@@ -2716,7 +2943,7 @@ namespace luncher_rayman_aréna
                     }
                     else if (skin2.SelectedIndex.ToString() == "1")
                     {
-                        MessageBox.Show("ptizetre skin2 emplacement 4");
+                        MessageBox.Show("ptizetre skin1 emplacement 4");
                     }
                     else if (skin2.SelectedIndex.ToString() == "2")
                     {
@@ -2732,7 +2959,7 @@ namespace luncher_rayman_aréna
                     }
                     else if (skin2.SelectedIndex.ToString() == "1")
                     {
-                        MessageBox.Show("ptizetre skin2 emplacement 5");
+                        MessageBox.Show("ptizetre skin1 emplacement 5");
                     }
                     else if (skin2.SelectedIndex.ToString() == "2")
                     {
@@ -3783,9 +4010,65 @@ namespace luncher_rayman_aréna
             Process.Start("https://www.youtube.com/channel/UCC7lq5N1RVgDsAiTo1kKEeg");
         }
 
-        private void webView21_Click_2(object sender, EventArgs e)
+        private async void webView21_Click_2(object sender, EventArgs e)
+
         {
 
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            Process.Start(@"C:\ProgramData\Caphyon\Advanced Installer\{D5348DE8-1023-4C18-B0F4-83CB3CA62F52}\Rayman Arena The Definitive Edition Online.exe");
+        }
+
+        private void webView22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+        public class Adapters
+        {
+            public System.Collections.Generic.List<String> net_adapters()
+            {
+                List<String> values = new List<String>();
+                foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
+                {
+
+                    values.Add(nic.Name);
+                }
+                return values;
+            }
+        }
+
+
+        private void button16_Click_1(object sender, EventArgs e)
+        {
+            
+
+            File.WriteAllText(cheminfichier, curItem);
+            File.WriteAllText(cheminfichier2, curItem);
+            MessageBox.Show(curItem+Choixcard) ;
+
+            
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            curItem = comboBox1.SelectedItem.ToString();
         }
     }
 }
