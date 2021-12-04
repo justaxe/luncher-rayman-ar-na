@@ -27,22 +27,75 @@ namespace luncher_rayman_aréna
 
         string cheminfichier = @"game\HD\adapter.txt "; //chemain fichier txt carte reseau
         string cheminfichier2 = @"game\SD\adapter.txt "; //chemain fichier txt carte reseau
+        string cheminfichierLangue = @"fils\Langue.txt "; //chemain fichier txt carte reseau
 
 
         string curItem; //contenue de l'asenseur selectionner carte reseau
 
+       
 
+      
 
         public acceuil()
         {
 
 
-   
+
+       
+
+
+
+
+
+
 
 
             InitializeComponent();
 
-// affiche les interface reseau au demarrage
+
+
+
+            //test si le fichier txt est present (partie langue)
+            if (!File.Exists(cheminfichierLangue))
+            {
+                File.WriteAllText(cheminfichierLangue, "EN");
+                changelangue.SelectedIndex = 0;
+                choixlangue();
+            }
+            else
+            {
+                string lecture = File.ReadAllText(cheminfichierLangue);
+
+                if (lecture == "EN")
+                {
+                    changelangue.SelectedIndex = 0;
+                    choixlangue();
+
+                }
+                else if (lecture == "FR")
+                {
+                    changelangue.SelectedIndex = 1;
+                    choixlangue();
+
+                }
+                else if (lecture == "ES")
+                {
+                    changelangue.SelectedIndex = 2;
+                    choixlangue();
+
+                }
+            }
+
+            
+
+
+
+
+
+
+
+
+            // affiche les interface reseau au demarrage
             Adapters obj = new Adapters();
             var value = obj.net_adapters();
             foreach (var name in value) { comboBox1.Items.Add(name); Console.WriteLine(name); }
@@ -55,7 +108,7 @@ namespace luncher_rayman_aréna
             //test si le fichier txt est present
             if (!File.Exists(cheminfichier))
             {
-                MessageBox.Show("fichier non present");
+                //MessageBox.Show("fichier non present");
                 foreach (var name in value)  // on cherche si la personne a bien radmin vpn sur son pc
                 {
                     if (name == "Radmin VPN")
@@ -112,7 +165,8 @@ namespace luncher_rayman_aréna
         string messageboxOkVideo= "the game's intro videos have been reactivated";
         string Choixcard = " well was to select";
         string Pasradmin = "we have detected that you do not have Radmin Vpn installed. This program is required to play the game online";
-
+        string CopieNomReseau = "the network name has been copied to the clipboard";
+        string CopieMdpReseau = "the network passord has been copied to the clipboard";
 
 
 
@@ -790,7 +844,7 @@ namespace luncher_rayman_aréna
 
         private void BtnLuncheurGameFull_Click(object sender, EventArgs e)
         {
-            Process.Start(@"fils\CD2.ISO");
+           
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -951,7 +1005,12 @@ namespace luncher_rayman_aréna
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Process.Start(@"game\SD\dgVoodooCpl");
+            // Process proc = new Process(); proc.StartInfo.FileName = @"game\SD\dgVoodooCpl.exe"; proc.StartInfo.UseShellExecute = true; proc.StartInfo.Verb = "runas"; proc.Start(); 
+
+            //System.Diagnostics.Process.Start("cmd", @"/c cd game\SD\ & start dgVoodooCpl.exe");
+
+            Process.Start(@"dgVoodooCpl.exe");
+
         }
 
         private void label4_Click(object sender, EventArgs e)
@@ -988,15 +1047,19 @@ namespace luncher_rayman_aréna
 
         }
 
-        private void BtnChangeLangue_Click(object sender, EventArgs e)
-        {
-            
+
+
+        void choixlangue() {
+
             if (changelangue.SelectedIndex.ToString() == "0")
             {
                 System.Diagnostics.Process.Start("cmd", @"/c copy fils\ini\ModEN\Ubisoft\ubi.ini C:\Windows\Ubisoft\ubi.ini /Y	");
 
+                File.WriteAllText(cheminfichierLangue, "EN");
                 messageboxLangue = "the game is now in English !!";
-                MessageBox.Show(messageboxLangue);
+                CopieNomReseau = "the name of the network was copied to the clipboard";
+                CopieMdpReseau = "the network password has been copied to the clipboard";
+                //MessageBox.Show(messageboxLangue);
                 //changement de langue 
 
                 groupBox9.Text = "Language ";
@@ -1013,13 +1076,14 @@ namespace luncher_rayman_aréna
                 label30.Text = "Forgot to join the game discord";
                 label31.Text = "to organize matches and many other things !! ";
                 label21.Text = "choose the network card with which you play online";
+                label7.Text = "name";
+                label25.Text = "password";
 
                 label1.Text = "💻 Launch the game in full screen";
                 label12.Text = "Without video";
                 label13.Text = "With video ";
                 label14.Text = "low graphics";
                 label2.Text = "💻  Launch the game in windowed mode: ";
-                label7.Text = "💿 Mount CD2 :";
                 label9.Text = "Launch a custom config";
                 groupBox7.Text = "problem / advanced settings ";
                 label18.Text = "to fix ";
@@ -1052,18 +1116,17 @@ namespace luncher_rayman_aréna
                 btnValidskin4.Text = "edit skin";
 
                 reseauSociaux.Text = "Follow us";
-                
+
 
                 button21.Text = "reset all skin to default";
 
                 //modifie les toltip
-                toolTip1.SetToolTip(BtnLuncheurGameFull, "Do this only if you receive an error that asks for CD2 when launching the game");
                 toolTip1.SetToolTip(button17, "for advanced users who create their own config");
                 toolTip1.SetToolTip(button10, "for advanced users who create their own config");
 
                 toolTip1.SetToolTip(button13, "leave the intro video of the game");
                 toolTip1.SetToolTip(button12, "remove intro video from game");
-                
+
 
                 //modifer les boite de dialogue
 
@@ -1080,8 +1143,11 @@ namespace luncher_rayman_aréna
             {
                 System.Diagnostics.Process.Start("cmd", @"/c copy fils\ini\ModFR\Ubisoft\ubi.ini C:\Windows\Ubisoft\ubi.ini /Y	");
 
+                File.WriteAllText(cheminfichierLangue, "FR");
                 messageboxLangue = "le jeu est maintenant en français !!";
-                MessageBox.Show(messageboxLangue);
+                //MessageBox.Show(messageboxLangue);
+                CopieNomReseau = "le nom du réseau à été copié dans le presse-papiers";
+                CopieMdpReseau = "le mot de passe réseau a été copié dans le presse-papiers";
 
 
                 //changement de langue 
@@ -1100,13 +1166,14 @@ namespace luncher_rayman_aréna
                 label30.Text = "Oublié pas de rejoindre le discord du jeu";
                 label31.Text = "pour organiser des match et plain d'autre choses!! ";
                 label21.Text = "choisir la carte réseaux avec la qu'elle vous jouer en ligne ";
+                label7.Text = "nom";
+                label25.Text = "mot de passe";
 
                 label1.Text = "💻 Lancer le jeu en plein écran";
                 label12.Text = "Sans video ";
                 label13.Text = "Avec video ";
                 label14.Text = "graphisme bas";
                 label2.Text = "💻 Lancer le jeu en mode fentre :";
-                label7.Text = "💿 Monter CD2 :";
                 label9.Text = "Lancer une config personnaliser";
                 groupBox7.Text = "problem / paramétres avancée ";
                 label18.Text = "Réparer ";
@@ -1143,7 +1210,6 @@ namespace luncher_rayman_aréna
                 reseauSociaux.Text = "Suivez-nous";
 
                 //modifie les toltip
-                toolTip1.SetToolTip(BtnLuncheurGameFull, "Le faire uniquement si vous recevez une erreur qui demande le CD2 au lancement du jeu");
                 toolTip1.SetToolTip(button17, "pour les utilisateur avancer qui on crée leur prpore config");
                 toolTip1.SetToolTip(button10, "pour les utilisateur avancer qui on crée leur prpore config");
 
@@ -1155,8 +1221,8 @@ namespace luncher_rayman_aréna
 
                 messageboxNoVideo = "les vidéos d'introduction du jeu ont été désactivées";
                 messageboxOkVideo = "les vidéos d'introduction du jeu ont été réactivées";
-                 Choixcard = " bien a été sélectionné";
-                 Pasradmin = "nous avons détecté que vous n'avez pas installé Radmin Vpn. Ce programme est nécessaire pour jouer au jeu en ligne";
+                Choixcard = " bien a été sélectionné";
+                Pasradmin = "nous avons détecté que vous n'avez pas installé Radmin Vpn. Ce programme est nécessaire pour jouer au jeu en ligne";
 
 
                 toolTip1.SetToolTip(Modifier, "Modifier");
@@ -1166,18 +1232,19 @@ namespace luncher_rayman_aréna
             else if (changelangue.SelectedIndex.ToString() == "2")
             {
                 System.Diagnostics.Process.Start("cmd", @"/c copy fils\ini\ModES\Ubisoft\ubi.ini C:\Windows\Ubisoft\ubi.ini /Y	");
-
+                File.WriteAllText(cheminfichierLangue, "ES");
                 messageboxLangue = "el juego ahora esta en español !! !!";
-                MessageBox.Show(messageboxLangue);
-
+               // MessageBox.Show(messageboxLangue);
+                CopieNomReseau = "el nombre de la red se ha copiado en el portapapeles";
+                CopieMdpReseau = "la contraseña de la red se ha copiado en el portapapeles";
 
 
                 //changement de langue 
 
                 groupBox9.Text = "idioma ";
                 label8.Text = "Para jugar en línea, siga este breve video:";
-                groupBox8.Text = "jouer en ligne ";
-                label20.Text = "selectionner la langue du jeu: ";
+                groupBox8.Text = "jugar en línea ";
+                label20.Text = "selecciona el idioma del juego: ";
                 label10.Text = "- Descargar";
                 label24.Text = "- Instálalo en tu PC";
                 label11.Text = "-únete a la siguiente red privada:";
@@ -1188,13 +1255,14 @@ namespace luncher_rayman_aréna
                 label30.Text = "no te olvides de unirte al juego de la discord";
                 label31.Text = "para organizar partidos y muchas otras cosas !! ";
                 label21.Text = "elige la tarjeta de red con la que te jugará online ";
+                label7.Text = "apellido";
+                label25.Text = "contraseña";
 
                 label1.Text = "💻 Inicie el juego en pantalla completa.";
                 label12.Text = "No hay video ";
                 label13.Text = "con video ";
                 label14.Text = "gráficos bajos";
                 label2.Text = "💻 Inicia el juego en modo ventana. :";
-                label7.Text = "💿 Montar CD2 :";
                 label9.Text = "Lanzar una configuración personalizada";
                 groupBox7.Text = "problema / configuración avanzada";
                 label18.Text = "reparar ";
@@ -1231,7 +1299,6 @@ namespace luncher_rayman_aréna
                 reseauSociaux.Text = "Síguenos";
 
                 //modifie les toltip
-                toolTip1.SetToolTip(BtnLuncheurGameFull, "Haz esto solo si recibes un error de CD que pregunta al iniciar el juego");
                 toolTip1.SetToolTip(button17, "para usuarios avanzados que crean su propia configuración");
                 toolTip1.SetToolTip(button10, "para usuarios avanzados que crean su propia configuración");
 
@@ -1248,9 +1315,17 @@ namespace luncher_rayman_aréna
 
 
                 toolTip1.SetToolTip(Modifier, "Editar");
-                
+
 
             }
+
+        }
+
+
+        private void BtnChangeLangue_Click(object sender, EventArgs e)
+        {
+
+            choixlangue();
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -4027,10 +4102,7 @@ namespace luncher_rayman_aréna
 
         }
 
-        private void button9_Click(object sender, EventArgs e)
-        {
-            Process.Start(@"C:\ProgramData\Caphyon\Advanced Installer\{D5348DE8-1023-4C18-B0F4-83CB3CA62F52}\Rayman Arena The Definitive Edition Online.exe");
-        }
+
 
         private void webView22_Click(object sender, EventArgs e)
         {
@@ -4069,6 +4141,23 @@ namespace luncher_rayman_aréna
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             curItem = comboBox1.SelectedItem.ToString();
+        }
+
+        private void button9_Click_1(object sender, EventArgs e)
+        {
+            Process.Start(@"C:\ProgramData\Caphyon\Advanced Installer\{D5348DE8-1023-4C18-B0F4-83CB3CA62F52}\Rayman Arena The Definitive Edition Online.exe");
+        }
+
+        private void BtnNomReseau_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(this.BtnNomReseau.Text);
+            MessageBox.Show(CopieNomReseau);
+        }
+
+        private void BtnMdpReseau_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(this.BtnMdpReseau.Text);
+            MessageBox.Show(CopieMdpReseau);
         }
     }
 }

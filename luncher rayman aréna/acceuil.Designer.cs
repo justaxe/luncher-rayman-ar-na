@@ -69,7 +69,6 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.button21 = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.BtnLuncheurGameFull = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
@@ -83,7 +82,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -114,7 +112,6 @@
             this.label28 = new System.Windows.Forms.Label();
             this.label27 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
@@ -136,6 +133,10 @@
             this.reseauSociaux = new System.Windows.Forms.GroupBox();
             this.Modifier = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.BtnNomReseau = new System.Windows.Forms.Button();
+            this.BtnMdpReseau = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.photoskin1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -643,23 +644,6 @@
             this.button21.Text = "remettre tous les skin par default";
             this.button21.UseVisualStyleBackColor = true;
             // 
-            // BtnLuncheurGameFull
-            // 
-            this.BtnLuncheurGameFull.AccessibleDescription = "";
-            this.BtnLuncheurGameFull.BackColor = System.Drawing.Color.Transparent;
-            this.BtnLuncheurGameFull.BackgroundImage = global::luncher_rayman_aréna.Properties.Resources.inter_la;
-            this.BtnLuncheurGameFull.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnLuncheurGameFull.Font = new System.Drawing.Font("Monospac821 BT", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnLuncheurGameFull.Location = new System.Drawing.Point(45, 347);
-            this.BtnLuncheurGameFull.Margin = new System.Windows.Forms.Padding(0);
-            this.BtnLuncheurGameFull.Name = "BtnLuncheurGameFull";
-            this.BtnLuncheurGameFull.Size = new System.Drawing.Size(92, 79);
-            this.BtnLuncheurGameFull.TabIndex = 0;
-            this.BtnLuncheurGameFull.Tag = "";
-            this.toolTip1.SetToolTip(this.BtnLuncheurGameFull, "Do this only if you receive an error that asks for CD2 when launching the game");
-            this.BtnLuncheurGameFull.UseVisualStyleBackColor = false;
-            this.BtnLuncheurGameFull.Click += new System.EventHandler(this.BtnLuncheurGameFull_Click);
-            // 
             // button10
             // 
             this.button10.AccessibleDescription = "";
@@ -667,7 +651,7 @@
             this.button10.BackgroundImage = global::luncher_rayman_aréna.Properties.Resources.inter_cr_open;
             this.button10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button10.Font = new System.Drawing.Font("Monospac821 BT", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button10.Location = new System.Drawing.Point(227, 344);
+            this.button10.Location = new System.Drawing.Point(115, 353);
             this.button10.Margin = new System.Windows.Forms.Padding(0);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(65, 57);
@@ -712,7 +696,7 @@
             this.button11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button11.Font = new System.Drawing.Font("Castellar", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.button11.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.button11.Location = new System.Drawing.Point(343, 81);
+            this.button11.Location = new System.Drawing.Point(319, 81);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(67, 52);
             this.button11.TabIndex = 23;
@@ -741,7 +725,7 @@
             this.button17.BackgroundImage = global::luncher_rayman_aréna.Properties.Resources.inter_cr;
             this.button17.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button17.Font = new System.Drawing.Font("Monospac821 BT", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button17.Location = new System.Drawing.Point(341, 344);
+            this.button17.Location = new System.Drawing.Point(229, 353);
             this.button17.Margin = new System.Windows.Forms.Padding(0);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(65, 57);
@@ -766,7 +750,6 @@
             this.groupBox6.Controls.Add(this.button11);
             this.groupBox6.Controls.Add(this.label9);
             this.groupBox6.Controls.Add(this.button10);
-            this.groupBox6.Controls.Add(this.label7);
             this.groupBox6.Controls.Add(this.label6);
             this.groupBox6.Controls.Add(this.label5);
             this.groupBox6.Controls.Add(this.label4);
@@ -777,7 +760,6 @@
             this.groupBox6.Controls.Add(this.button3);
             this.groupBox6.Controls.Add(this.button1);
             this.groupBox6.Controls.Add(this.label1);
-            this.groupBox6.Controls.Add(this.BtnLuncheurGameFull);
             this.groupBox6.Controls.Add(this.button2);
             this.groupBox6.Location = new System.Drawing.Point(602, 86);
             this.groupBox6.Name = "groupBox6";
@@ -790,7 +772,7 @@
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label23.ForeColor = System.Drawing.Color.White;
-            this.label23.Location = new System.Drawing.Point(359, 405);
+            this.label23.Location = new System.Drawing.Point(247, 414);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(28, 16);
             this.label23.TabIndex = 31;
@@ -801,7 +783,7 @@
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.ForeColor = System.Drawing.Color.White;
-            this.label22.Location = new System.Drawing.Point(245, 407);
+            this.label22.Location = new System.Drawing.Point(133, 416);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(29, 16);
             this.label22.TabIndex = 30;
@@ -812,7 +794,7 @@
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.White;
-            this.label14.Location = new System.Drawing.Point(332, 139);
+            this.label14.Location = new System.Drawing.Point(308, 139);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(86, 16);
             this.label14.TabIndex = 28;
@@ -845,22 +827,11 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(217, 319);
+            this.label9.Location = new System.Drawing.Point(105, 328);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(168, 16);
             this.label9.TabIndex = 22;
             this.label9.Text = "Launch a custom config";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(13, 319);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(181, 29);
-            this.label7.TabIndex = 20;
-            this.label7.Text = "💿 Mount CD2:";
             // 
             // label6
             // 
@@ -1013,7 +984,7 @@
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.ForeColor = System.Drawing.Color.White;
-            this.label19.Location = new System.Drawing.Point(290, 103);
+            this.label19.Location = new System.Drawing.Point(302, 118);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(108, 16);
             this.label19.TabIndex = 28;
@@ -1026,7 +997,7 @@
             this.button14.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.button14.Font = new System.Drawing.Font("Castellar", 15.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
             this.button14.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.button14.Location = new System.Drawing.Point(308, 45);
+            this.button14.Location = new System.Drawing.Point(320, 56);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(65, 57);
             this.button14.TabIndex = 27;
@@ -1038,7 +1009,7 @@
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(238, 105);
+            this.label18.Location = new System.Drawing.Point(236, 105);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(39, 16);
             this.label18.TabIndex = 26;
@@ -1088,6 +1059,7 @@
             this.button9.Size = new System.Drawing.Size(65, 57);
             this.button9.TabIndex = 3;
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click_1);
             // 
             // button8
             // 
@@ -1132,6 +1104,10 @@
             // 
             this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox8.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox8.Controls.Add(this.label25);
+            this.groupBox8.Controls.Add(this.label7);
+            this.groupBox8.Controls.Add(this.BtnNomReseau);
+            this.groupBox8.Controls.Add(this.BtnMdpReseau);
             this.groupBox8.Controls.Add(this.comboBox1);
             this.groupBox8.Controls.Add(this.Modifier);
             this.groupBox8.Controls.Add(this.webView22);
@@ -1142,7 +1118,6 @@
             this.groupBox8.Controls.Add(this.label28);
             this.groupBox8.Controls.Add(this.label27);
             this.groupBox8.Controls.Add(this.label26);
-            this.groupBox8.Controls.Add(this.label25);
             this.groupBox8.Controls.Add(this.label11);
             this.groupBox8.Controls.Add(this.label24);
             this.groupBox8.Controls.Add(this.label21);
@@ -1226,7 +1201,7 @@
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label28.ForeColor = System.Drawing.Color.White;
-            this.label28.Location = new System.Drawing.Point(15, 372);
+            this.label28.Location = new System.Drawing.Point(15, 380);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(141, 16);
             this.label28.TabIndex = 29;
@@ -1238,7 +1213,7 @@
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label27.ForeColor = System.Drawing.Color.White;
-            this.label27.Location = new System.Drawing.Point(15, 351);
+            this.label27.Location = new System.Drawing.Point(15, 362);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(126, 15);
             this.label27.TabIndex = 28;
@@ -1250,24 +1225,11 @@
             this.label26.AutoSize = true;
             this.label26.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label26.ForeColor = System.Drawing.Color.White;
-            this.label26.Location = new System.Drawing.Point(15, 331);
+            this.label26.Location = new System.Drawing.Point(15, 346);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(263, 16);
             this.label26.TabIndex = 27;
             this.label26.Text = "-select the network card \"radmin vpn\"";
-            // 
-            // label25
-            // 
-            this.label25.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label25.AutoSize = true;
-            this.label25.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.ForeColor = System.Drawing.Color.Red;
-            this.label25.Location = new System.Drawing.Point(8, 303);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(212, 20);
-            this.label25.TabIndex = 26;
-            this.label25.Text = "raymanarenaonline  fortlc";
             // 
             // label11
             // 
@@ -1527,6 +1489,54 @@
             this.comboBox1.TabIndex = 33;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
+            // BtnNomReseau
+            // 
+            this.BtnNomReseau.BackColor = System.Drawing.Color.White;
+            this.BtnNomReseau.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnNomReseau.Location = new System.Drawing.Point(26, 312);
+            this.BtnNomReseau.Name = "BtnNomReseau";
+            this.BtnNomReseau.Size = new System.Drawing.Size(160, 31);
+            this.BtnNomReseau.TabIndex = 33;
+            this.BtnNomReseau.Text = "raymanarenaonline";
+            this.BtnNomReseau.UseVisualStyleBackColor = false;
+            this.BtnNomReseau.Click += new System.EventHandler(this.BtnNomReseau_Click);
+            // 
+            // BtnMdpReseau
+            // 
+            this.BtnMdpReseau.BackColor = System.Drawing.Color.White;
+            this.BtnMdpReseau.Font = new System.Drawing.Font("Book Antiqua", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnMdpReseau.Location = new System.Drawing.Point(212, 312);
+            this.BtnMdpReseau.Name = "BtnMdpReseau";
+            this.BtnMdpReseau.Size = new System.Drawing.Size(75, 30);
+            this.BtnMdpReseau.TabIndex = 34;
+            this.BtnMdpReseau.Text = "fortlc";
+            this.BtnMdpReseau.UseVisualStyleBackColor = false;
+            this.BtnMdpReseau.Click += new System.EventHandler(this.BtnMdpReseau_Click);
+            // 
+            // label7
+            // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.White;
+            this.label7.Location = new System.Drawing.Point(35, 295);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(48, 16);
+            this.label7.TabIndex = 35;
+            this.label7.Text = "Name";
+            // 
+            // label25
+            // 
+            this.label25.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.ForeColor = System.Drawing.Color.White;
+            this.label25.Location = new System.Drawing.Point(207, 295);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(75, 16);
+            this.label25.TabIndex = 36;
+            this.label25.Text = "Password";
+            // 
             // acceuil
             // 
             this.AccessibleDescription = "";
@@ -1550,7 +1560,6 @@
             this.Name = "acceuil";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Rayman Arena Definitve Edition  Online Beta 1";
-            this.toolTip1.SetToolTip(this, "test 25");
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.acceuil_Load);
             this.groupBox1.ResumeLayout(false);
@@ -1588,8 +1597,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button BtnLuncheurGameFull;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -1604,7 +1611,6 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button7;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -1642,7 +1648,6 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Button button17;
-        private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Label label26;
@@ -1695,6 +1700,10 @@
         private Microsoft.Web.WebView2.WinForms.WebView2 webView22;
         private System.Windows.Forms.Button Modifier;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button BtnNomReseau;
+        private System.Windows.Forms.Button BtnMdpReseau;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label7;
     }
 }
 
