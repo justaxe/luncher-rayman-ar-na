@@ -25,8 +25,8 @@ namespace luncher_rayman_aréna
 
 
 
-        string cheminfichier = @"game\HD\adapter.txt "; //chemain fichier txt carte reseau
-        string cheminfichier2 = @"game\SD\adapter.txt "; //chemain fichier txt carte reseau
+        string cheminfichier = @"game\HD\arenaPatch.cfg "; //chemain fichier txt carte reseau
+        string cheminfichier2 = @"game\SD\arenaPatch.cfg "; //chemain fichier txt carte reseau
         string cheminfichierLangue = @"fils\Langue.txt "; //chemain fichier txt carte reseau
 
 
